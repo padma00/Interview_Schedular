@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <p class="text-center text-4xl font-bold" >Interview Creating Portal</p>
+  
+          <div class=" grid grid-cols-1 bg-blue-500 mr-5 ml-5 mt-5 p-2">
+            <p class="text-center text-white font-bold text-xl">schedule an Interview</p>
+          </div>
+          
+          <div class=" grid grid-cols-2 gap-2 mr-5 ml-5 bg-gray-700 text-white pt-3">
+  
+            <!-- Interviewer -->
+              <div class="text-center p-2 ">
+                  <p>Interviewer name </p>
+  
+                  <div class="m-2">
+                    <input v-model="interviewer_name" class="w-full text-black" list="interviewers" name="interviewer" id="interviewer">
+                    
+                    <datalist id="interviewers">
+  
+                      <option v-for="user in users" :key="user.uid" :value="user.name" />
+  
+                    </datalist>
+                    
+                  </div>
+  
+                  <p>Start time</p>
+  
+                  <div class="m-2">
+                    <input v-model="start_time" class="w-full text-black" type="datetime-local" list="start_time" name="starttime" id="starttime">
+                  </div>
+  
+              </div>
+  
+  
+              <!-- interviewee -->
+              <div class="text-center p-2">
+  
+                  <p>interviewee name </p>
+  
+                  <div class="m-2">
+                    <input v-model="interviewee_name" class="w-full text-black" list="interviewee_name" name="employees" id="employees">
+                    <datalist id="interviewee_name">
+                      <option v-for="user in users" :key="user.id" :value="user.name" />
+                    </datalist>
+                  </div>
+  
+  
+                  <p>End time</p>
+                  <div class="m-2">
+                    <input v-model="end_time" class="w-full text-black" type="datetime-local" list="endtimes" name="endtime" id="endtime">
+                  </div>
+  
+              </div>
+          </div>
+  
+          <div class=" grid grid-cols-1 bg-blue-500 mr-5 ml-5 ">
+            <button @click="schedule" class="text-center text-white font-bold text-xl p-2">schedule</button>
+          </div>
+  
+          <div id="padma">
+            <p class="text-center text-4xl font-bold" >Upcoming Interviews</p>
+          </div>
+         
+
+          <div class="grid grid-cols-1 bg-gray-700 m-5 text-white">
+            <table class="table-auto border-separate border border-gray-700">
+             
+              <thead>
+                <tr>
+                  <th class="border border-green-700">Intweviewer</th>
+                  <th class="border border-green-700">Intweviewee</th>
+                  <th class="border border-green-700">start time</th>
+                  <th class="border border-green-700">end time</th>
+                  <th class="border border-green-700">edit </th>
+                </tr>
+              </thead>
+  
+    
+  
+              <div v-if="available_shedules.length != 0">
+                <tbody class=" border-2 border-green-700 p-2" >
+                  <tr v-for="shedule in available_shedules" :key="shedule.id">
+                    <td class="border border-green-700 p-2" >
+                      {{shedule.interviewer_name}}
+                    </td>
+                    <td class="border border-green-700 p-2">
+                      {{shedule.interviewee_name}}
+                    </td>
+                    <td class="border border-green-700 p-2">
+                      {{shedule.start_time}}
+                    </td>
+                    <td class="border border-green-700 p-2">
+                      {{shedule.end_time}}
+                    </td>
+                    <td class="border border-green-700 p-2 text-center">
+                      <button @click="edit_data(shedule.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full" >edit</button>
+                    </td>
+                  </tr>
+  
+                </tbody>
+              </div>
+  
+            </table>
+          </div>
+  
+  
+      </div>
+    
+    
+</body>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="app.js"></script>
+
+</html>
