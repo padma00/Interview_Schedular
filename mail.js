@@ -20,8 +20,8 @@ var mailOptions = {
 };
 emailService.rawData = function(reciver1,reciver2,start_time,end_time){
     mailOptions.to = reciver1 + ", " + reciver2;
-    start_time = format('dd-MM-yyyy hh:mm', start_time);
-    end_time = format('dd-MM-yyyy hh:mm', end_time);
+    // start_time = format('dd-MM-yyyy hh:mm', start_time);
+    // end_time = format('dd-MM-yyyy hh:mm', end_time);
     mailOptions.text = "Your interview is scheduled from " + start_time.toString() + " to " + end_time.toString();
     transporter.sendMail(mailOptions,  function(error, info){
         if (error) {
