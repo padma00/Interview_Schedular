@@ -63,4 +63,11 @@
 
 # Snapshots for multiple interviewers and interviewee
 
+![image](https://user-images.githubusercontent.com/55046087/143619681-c7e97eb2-f48c-4432-ad45-f0c7e9f2fadb.png)
+
+![image](https://user-images.githubusercontent.com/55046087/143619714-ce1e3d69-37d8-41de-9494-0bd40f8e889e.png)
+
+![image](https://user-images.githubusercontent.com/55046087/143619941-9a2019bb-3f98-4ca0-9c17-f4bb253b0a2c.png)
+
+![image](https://user-images.githubusercontent.com/55046087/143620228-c4c30816-3b9b-428b-a24e-c60e95863ede.png)
 
