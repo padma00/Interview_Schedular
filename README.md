@@ -47,3 +47,20 @@
  
 ![image](https://user-images.githubusercontent.com/55046087/143578601-b9f8b346-6804-40f1-a456-e2e2ccb4afa0.png)
 
+
+# Extension (Backend only) - for multiple interviewers and multiple interviewee at same time 
+
+-> files used for testing backend for multiple interviewrs and interviewee
+             -server_multiple.js
+             -data_multiple.js
+             -mail_multiple.js
+
+-> using postman testing has been done 
+
+-> for shceduling ,taken an array of all the id's and validated the interview time according to the scheduled data
+
+-> for deleting the scheduled interview of multiple interviewers and interviewee used objectID for a object inserted in database
+
+# Snapshots for multiple interviewers and interviewee
+
+

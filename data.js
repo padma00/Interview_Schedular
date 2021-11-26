@@ -8,6 +8,10 @@ data.users = [];
 
 
 data.check = function (uid, start_time, end_time) {
+
+   
+
+
     var n = data.schedule_data.length;
     for (var i = 0; i < n; i++) {
         if (data.schedule_data[i].interviewee == uid || data.schedule_data[i].interviwer == uid) {
@@ -20,11 +24,32 @@ data.check = function (uid, start_time, end_time) {
     }
     return true;
 }
-
+data.intercheck=function(arr1,arr2){
+    var n=arr1.length
+    var m=arr2.length
+    for(var i=0;i<n;i++){
+           for(var j=0;j<m;j++){
+               if(arr1[i]==arr2[j])return false;
+           }
+    }
+}
 data.schedule =  function (id1, id2, start_time, end_time, timestamp) {
     //if both selected user are same
     SyncVariables().catch(console.error);
-    
+     //each participants in id1 should be different than each participants in id2 
+
+    var arr1=id1
+    var arr2=id2
+    var n=arr1.length
+    var m=arr2.length
+    for(var i=0;i<n;i++){
+           for(var j=0;j<m;j++){
+               if(arr1[i]==arr2[j])return false;
+           }
+    }
+
+
+
     if (id1 === id2)
         return "Not Scheduled";
        // console.log(id1 + " " + id2);
