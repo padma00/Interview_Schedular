@@ -10,6 +10,11 @@ MongoClient.connect(url, function (err, db) {
         console.log("users created!");
         db.close();
     });
+    dbo.createCollection("schedule_data", function (err, res) {
+        if (err) throw err;
+        console.log("Schedule_data created!");
+        db.close();
+    });
     var SampleUser = [{
 
         uid: 1,
@@ -39,11 +44,6 @@ MongoClient.connect(url, function (err, db) {
     dbo.collection("users").insertMany(SampleUser, function (err, res) {
         if (err) throw err;
         console.log("sample user's data inserted");
-        db.close();
-    });
-    dbo.createCollection("schedule_data", function (err, res) {
-        if (err) throw err;
-        console.log("Schedule_data created!");
         db.close();
     });
 });

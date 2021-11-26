@@ -9,8 +9,7 @@ let app = Vue.createApp({
             available_shedules: [
             ],
             users: [
-            ],
-            check_error: ""
+            ]
         }
     },
 
@@ -34,6 +33,8 @@ let app = Vue.createApp({
 //2012-10-20 00:00
             
                 var timestamp = Date.now();
+                // var uid1=this.users.find(this.interviewer_name).uid;
+                // var uid2=this.users.find(this.intweviewee_name).uid;
                 await axios
                     .get('http://localhost:3000/schedule/',{
                         params : {
@@ -65,7 +66,9 @@ let app = Vue.createApp({
                     .catch(error => {
                         console.error(error)
                     })
-
+                    this.interviewer_name="";
+                    this.interviewee_name="";
+                    
 
                  //  this.getSheduleData();
                    

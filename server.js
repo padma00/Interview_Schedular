@@ -6,6 +6,7 @@ const data = require('./data');
 
 app.use(express.static(__dirname));
 data.initialize();
+
 app.get("/",function(req,res){
    res.sendFile(__dirname+"/index.html");
 })
@@ -21,6 +22,7 @@ app.get('/schedule',function(req,res){
     var timestamp = req.query.timestamp;
     console.log(interviewer_id,interviewee_id,start_time,end_time,timestamp);
     var out = data.schedule(interviewer_id,interviewee_id,start_time,end_time,timestamp);
+    console.log(out);
     res.send(out);
 });
 

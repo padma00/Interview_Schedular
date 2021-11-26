@@ -29,17 +29,18 @@ data.edit = function (timestamp) {
 }
 
 
-data.schedule = async function (id1, id2, start_time, end_time, timestamp) {
+data.schedule =  function (id1, id2, start_time, end_time, timestamp) {
     //if both selected user are same
     SyncVariables().catch(console.error);
-    if (id1 == id2)
+    if (id1 === id2)
         return "Not Scheduled";
+        console.log(id1 + " " + id2);
     var st = new Date(start_time);
     var en = new Date(end_time);
     if (st.getTime() >= en.getTime()) return "Not Scheduled";
     if (data.check(id1, start_time, end_time) && data.check(id2, start_time, end_time)) {
         //insert in database
-
+        
         var myobj = {
             timestamp: timestamp,
             interviwer: id1,
