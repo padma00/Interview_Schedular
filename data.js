@@ -16,7 +16,6 @@ data.check = function (uid, start_time, end_time) {
             if (en.getTime() >= st.getTime()) {
                 return false;
             }
-            return true;
         }
     }
     return true;
