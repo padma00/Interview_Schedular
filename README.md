@@ -2,8 +2,9 @@
 - A simple app where admins can create interviews by selecting participants, interview start time, and end time.
 
 # Technology Used
--> Backend -  NodeJS
--> Frontend - vueJS
+
+-> Backend -  NodeJS,ExpressJS
+-> Frontend - html/css/vueJS
 -> Database - MongoDB
 
 # Achieved points 
@@ -34,5 +35,9 @@
 # Problems faced
 
 -> used vueJS which has some glitch as it suddenly loses it's connection 
--> Database creation was not smooth 
--> 
+
+# Snapshots
+![image](https://user-images.githubusercontent.com/55046087/143480969-6fe12fdd-3242-4215-84d2-af54a0c4df30.png)
+ 
+ 
+![image](https://user-images.githubusercontent.com/55046087/143480906-8d672e4b-b2b5-4133-8cc2-3dbbdc83840d.png)
