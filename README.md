@@ -26,17 +26,18 @@
 
 -> Clone the repo
 
--> Open cmd
+-> On command prompt run following commands for first time to setup and create database
 
--> install npm
+         install npm
+         node first_run.js
+         node server.js
+         
+         
+-> After this you can simply use for starting server
 
--> run mongod ( to turn database server on)
+          node server.js
 
--> node first_run.js (for first time to setup and create database)
-
--> node server.js
-
--> go to http://localhost:3000/
+-> Go to http://localhost:3000/
 
 
 # Snapshots
