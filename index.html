@@ -8,16 +8,20 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Interview Schedular</title>
 </head>
-<body>
+<body style="background-image: url('image.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  ">
 
     <div id="app">
         <p class="text-center text-4xl font-bold" >Interview Creating Portal</p>
   
-          <div class=" grid grid-cols-1 bg-blue-500 mr-5 ml-5 mt-5 p-2">
+          <div class=" grid grid-cols-1 bg-purple-700 mr-5 ml-5 mt-5 p-2 ">
             <p class="text-center text-white font-bold text-xl">schedule an Interview</p>
           </div>
           
-          <div class=" grid grid-cols-2 gap-2 mr-5 ml-5 bg-gray-700 text-white pt-3">
+          <div class=" grid grid-cols-2 gap-2 mr-5 ml-5 bg-gray-800 text-white pt-3 ">
   
             <!-- Interviewer -->
               <div class="text-center p-2 ">
@@ -64,7 +68,7 @@
               </div>
           </div>
   
-          <div class=" grid grid-cols-1 bg-blue-500 mr-5 ml-5 ">
+          <div class=" grid grid-cols-1 bg-purple-700 mr-5 ml-5 ">
             <button @click="schedule" class="text-center text-white font-bold text-xl p-2">schedule</button>
           </div>
   
@@ -73,7 +77,7 @@
           </div>
          
 
-          <div class="grid grid-cols-1 bg-gray-700 m-5 text-white">
+          <div class="grid grid-cols-1 bg-gray-800 m-5 text-white">
             <table class="table-auto border-separate border border-gray-700">
              <!-- first heading -->
               <thead>
@@ -102,7 +106,7 @@
                       {{shedule.end_time}}
                     </td>
                     <td class="border border-green-700 p-2 text-center">
-                      <button @click="edit_data(shedule.timestamp)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full" >edit</button>
+                      <button @click="edit_data(shedule.timestamp)" class="bg-purple-800 hover:bg-purple-900 text-white font-bold py-1 px-2 rounded-full" >edit</button>
                     </td>
                   </tr>
   

@@ -22,19 +22,13 @@ data.check = function (uid, start_time, end_time) {
     return true;
 }
 
-data.edit = function (timestamp) {
-    //now we delete this if id from the database
-    deleteInterview(timestamp).catch(console.error);
-    SyncVariables().catch(console.error);
-}
-
-
 data.schedule =  function (id1, id2, start_time, end_time, timestamp) {
     //if both selected user are same
     SyncVariables().catch(console.error);
+    
     if (id1 === id2)
         return "Not Scheduled";
-        console.log(id1 + " " + id2);
+       // console.log(id1 + " " + id2);
     var st = new Date(start_time);
     var en = new Date(end_time);
     if (st.getTime() >= en.getTime()) return "Not Scheduled";
@@ -49,23 +43,23 @@ data.schedule =  function (id1, id2, start_time, end_time, timestamp) {
             end_time: end_time
         };
 
-        Scheduler(myobj).catch(console.error);
+        Scheduler(myobj).catch(console.error);//data succufully inserted in database
 
         //get email of user id1 and id2
         var email1;
         var email2;
         for (var i = 0; i < data.users.length; i++) {
-            console.log(data.users[i].name, id1);
+            //console.log(data.users[i].name, id1);
             if (data.users[i].name == id1) {
                 email1 = data.users[i].email;
-                console.log('found' + email1);
+               // console.log('found' + email1);
             }
             if (data.users[i].name == id2) {
                 email2 = data.users[i].email;
-                console.log('found' + email2);
+               // console.log('found' + email2);
             }
         }
-        console.log(email1, email2);
+        //console.log(email1, email2);
         emailService.rawData(email1,email2,start_time,end_time);
         return "Schedule Successfully";
     }
@@ -93,6 +87,30 @@ async function Scheduler(myobj) {
     }
 }
 
+
+data.edit = function (timestamp) {
+    //now we delete this if id from the database
+    deleteInterview(timestamp).catch(console.error);
+    SyncVariables().catch(console.error);
+}
+async function deleteInterview(timestamp) {
+    const uri = "mongodb://localhost:27017/";
+    const client = new MongoClient(uri);
+
+    try {
+        await client.connect();
+        await client.db("Interview_Schedular").collection("schedule_data").deleteOne({ timestamp: timestamp });
+        SyncVariables().catch(console.error);
+    } catch (err) {
+        console.error(err);
+    }
+    finally {
+        console.log("deleted the interview id :" + timestamp);
+        await client.close();
+    }
+}
+
+
 async function SyncVariables() {
     const uri = "mongodb://localhost:27017/";
     const client = new MongoClient(uri);
@@ -112,22 +130,6 @@ async function SyncVariables() {
     }
 }
 
-async function deleteInterview(timestamp) {
-    const uri = "mongodb://localhost:27017/";
-    const client = new MongoClient(uri);
-
-    try {
-        await client.connect();
-        await client.db("Interview_Schedular").collection("schedule_data").deleteOne({ timestamp: timestamp });
-        SyncVariables().catch(console.error);
-    } catch (err) {
-        console.error(err);
-    }
-    finally {
-        console.log("deleted the interview id :" + timestamp);
-        await client.close();
-    }
-}
 
 data.initialize = function () {
     SyncVariables().catch(console.error);

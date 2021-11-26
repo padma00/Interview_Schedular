@@ -79,43 +79,6 @@ let app = Vue.createApp({
                 alert("check if all the fields are filled")
             }
 
-        },
-        getSheduleData:  function(){
-             axios
-                .get('http://localhost:3000/scheduled_data')
-                .then(res =>{
-                    console.log(res.data)
-                    let index = -1;
-                    res.data.forEach(e => {
-                        index++;
-                        if(this.interviewer_name === e.interviwer &&
-                            this.interviewee_name === e.interviewee &&
-                            this.start_time === e.start_time &&
-                            this.end_time === e.end_time
-                            ){
-                                let data = {
-                                    id:e._id,
-                                    interviewer_name:e.interviwer,
-                                    interviewee_name:e.interviewee,
-                                    start_time:this.getDate(e.start_time),
-                                    end_time:this.getDate(e.end_time)
-                                }
-
-                                this.available_shedules.splice(index,0,data)
-
-                                console.log(this.available_shedules)
-
-                                this.interviewee_name = "";
-                                this.interviewer_name = "";
-                                this.start_time = "";
-                                this.end_time = "";
-                                
-                            }
-                    });
-                })
-                .catch(error => {
-                    console.error(error)
-                })
         }
         ,
         getDate:function(time){
@@ -133,6 +96,7 @@ let app = Vue.createApp({
                 }
             })
 
+            
             this.available_shedules.splice(index, 1);
 
             this.interviewee_name = obj.interviewee_name;
@@ -202,5 +166,3 @@ let app = Vue.createApp({
 })
 app.mount("#app")
 
-
-//Not Scheduled
