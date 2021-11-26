@@ -25,11 +25,17 @@
 # How to use 
 
 -> Clone the repo
+
 -> Open cmd
+
 -> install npm
+
 -> run mongod ( to turn database server on)
+
 -> node first_run.js (for first time to setup and create database)
+
 -> node server.js
+
 -> go to http://localhost:3000/
 
 
