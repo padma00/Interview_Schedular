@@ -27,14 +27,11 @@
 -> Clone the repo
 -> Open cmd
 -> install npm
--> npm install mongodb
--> run mongod (turn database server on)
+-> run mongod ( to turn database server on)
+-> node first_run.js (for first time to setup and create database)
 -> node server.js
 -> go to http://localhost:3000/
 
-# Problems faced
-
--> used vueJS which has some glitch as it suddenly loses it's connection 
 
 # Snapshots
 ![image](https://user-images.githubusercontent.com/55046087/143480969-6fe12fdd-3242-4215-84d2-af54a0c4df30.png)
