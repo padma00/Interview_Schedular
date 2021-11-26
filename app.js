@@ -7,13 +7,6 @@ let app = Vue.createApp({
             start_time: "",
             end_time: "",
             available_shedules: [
-                // {
-                //     id: 0,
-                //     interviewer_name: "padma",
-                //     interviewee_name: "parag",
-                //     start_time: "2021-11-25T19:15",
-                //     end_time: "2021-11-25T16:15"
-                // }
             ],
             users: [
             ],
@@ -23,14 +16,14 @@ let app = Vue.createApp({
 
 
     methods: {
-        schedule: function () {
+        schedule: async function () {
 
             if (
                 (this.interviewer_name != "" && this.intweviewee_name != "" &&
                     this.start_time != "" && this.end_time != "")
             ) {
 
-               console.log(this.start_time)
+              // console.log(this.start_time)
 
                this.start_time = this.getDate(this.start_time);
                this.end_time = this.getDate(this.end_time);
@@ -40,33 +33,31 @@ let app = Vue.createApp({
             
 //2012-10-20 00:00
             
-
-                axios
+                var timestamp = Date.now();
+                await axios
                     .get('http://localhost:3000/schedule/',{
                         params : {
+                            timestamp:timestamp,
                             interviewer_id:this.interviewer_name,
                             interviewee_id:this.interviewee_name,
                             start_time:this.start_time,
-                            end_time:this.end_time
+                            end_time:this.end_time,
                         }
                     })
                     .then(res => {
-                        console.log(`statusCode: ${res.status}`)
-                        console.log(res)
-                        
                         if(res.data == "Not Scheduled" ){
                             alert(res.data)
                         }
                         else {
-                            this.available_shedules.push(
-                                {
-                                    id: this.available_shedules.length,
-                                    interviewer_name: this.interviewer_name,
-                                    interviewee_name: this.interviewee_name,
-                                    start_time: this.start_time,
-                                    end_time: this.end_time
-                                }
-                            )
+                                console.log(res.data)
+                            // console.log( typeof Date.now())
+                            this.available_shedules.push({
+                                timestamp: timestamp,
+                                interviewer_name:this.interviewer_name,
+                                interviewee_name:this.interviewee_name,
+                                start_time:this.start_time,
+                                end_time:this.end_time
+                            })
                         }
 
 
@@ -75,52 +66,82 @@ let app = Vue.createApp({
                         console.error(error)
                     })
 
-                    this.interviewee_name = "";
-                    this.interviewer_name = "";
-                    this.start_time = "";
-                    this.end_time = "";
 
+                 //  this.getSheduleData();
+                   
 
 
             }
+            else{
+                alert("check if all the fields are filled")
+            }
+
         },
+        getSheduleData:  function(){
+             axios
+                .get('http://localhost:3000/scheduled_data')
+                .then(res =>{
+                    console.log(res.data)
+                    let index = -1;
+                    res.data.forEach(e => {
+                        index++;
+                        if(this.interviewer_name === e.interviwer &&
+                            this.interviewee_name === e.interviewee &&
+                            this.start_time === e.start_time &&
+                            this.end_time === e.end_time
+                            ){
+                                let data = {
+                                    id:e._id,
+                                    interviewer_name:e.interviwer,
+                                    interviewee_name:e.interviewee,
+                                    start_time:this.getDate(e.start_time),
+                                    end_time:this.getDate(e.end_time)
+                                }
+
+                                this.available_shedules.splice(index,0,data)
+
+                                console.log(this.available_shedules)
+
+                                this.interviewee_name = "";
+                                this.interviewer_name = "";
+                                this.start_time = "";
+                                this.end_time = "";
+                                
+                            }
+                    });
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+        }
+        ,
         getDate:function(time){
             var bits = time.split(/\D/);
             var date = new Date(bits[0], --bits[1], bits[2], bits[3], bits[4]);
             return date;
-        }
-        ,
+        },
 
-        edit_data: function (id) {
-            console.log(id)
-
-
+        edit_data: async function (timestamp) {
             let index = -1;
             let obj = this.available_shedules.find(schedule => {
                 index++;
-                if (schedule.id === id) {
+                if (schedule.timestamp === timestamp) {
                     return schedule;
                 }
             })
 
-
             this.available_shedules.splice(index, 1);
+
             this.interviewee_name = obj.interviewee_name;
             this.interviewer_name = obj.interviewer_name;
             this.start_time = obj.start_time;
             this.end_time = obj.end_time;
+            this.timestamp = obj.timestamp
 
-
-
-
-
-
-
-
-            axios
+            await axios
                 .get('http://localhost:3000/edit/',{
                     params : {
-                        id:id
+                        timestamp:timestamp
                     }
                 })
                 .then(res => {
@@ -136,10 +157,12 @@ let app = Vue.createApp({
 
     },
     mounted() {
+
+      //  alert("padma")
+
         axios
         .get('http://localhost:3000/users')
         .then(res =>{
-            console.log('Hello Vishal')
             console.log(res.data)
             this.users = res.data
         })
@@ -151,11 +174,12 @@ let app = Vue.createApp({
         axios
         .get('http://localhost:3000/scheduled_data')
         .then(res =>{
-            console.log('Hello Vishal')
+
             console.log(res.data)
+
             res.data.forEach(e => {
                 let data = {
-                    id:this.available_shedules.length+1,
+                    timestamp: e.timestamp,
                     interviewer_name:e.interviwer,
                     interviewee_name:e.interviewee,
                     start_time:this.getDate(e.start_time),

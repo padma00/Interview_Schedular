@@ -16,9 +16,11 @@ app.get('/schedule',function(req,res){
     console.log('Schedule Pressed');
     var interviewer_id=req.query.interviewer_id;
     var interviewee_id=req.query.interviewee_id;
-    var start_time= (req.query.start_time);
-    var end_time= (req.query.end_time);
-    var out = data.schedule(interviewer_id,interviewee_id,start_time,end_time);
+    var start_time= req.query.start_time;
+    var end_time= req.query.end_time;
+    var timestamp = req.query.timestamp;
+    console.log(interviewer_id,interviewee_id,start_time,end_time,timestamp);
+    var out = data.schedule(interviewer_id,interviewee_id,start_time,end_time,timestamp);
     res.send(out);
 });
 
@@ -36,9 +38,7 @@ app.get('/scheduled_data',function(req,res){
 
 //edit  
 app.get('/edit',function(req,res){
-    console.log('edit called');
-    var out= req.query.id;
-    console.log('want to edit at index: ' + out);
+    var out= req.query.timestamp;
     data.edit(out);
 });
 
