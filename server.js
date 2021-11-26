@@ -42,6 +42,7 @@ app.get('/scheduled_data',function(req,res){
 app.get('/edit',function(req,res){
     var out= req.query.timestamp;
     data.edit(out);
+    
 });
 
 

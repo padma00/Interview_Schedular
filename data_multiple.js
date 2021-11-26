@@ -8,9 +8,16 @@ data.users = [];
 
 
 
-data.edit = function (_id) {
+data.edit = async function (_id) {
     //now we delete this if id from the database
-    deleteInterview(_id).catch(console.error);
+
+    try{
+        await deleteInterview(_id);
+        return "Edited Successfully";
+    }
+    catch(err){
+         return err.toString();
+    }
     SyncVariables().catch(console.error);
 }
 async function deleteInterview(_id) {

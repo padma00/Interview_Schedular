@@ -23,9 +23,10 @@ app.get('/scheduled_data',function(req,res){
 });
 
 //edit  
-app.get('/edit',function(req,res){
+app.get('/edit',async function(req,res){
     var _id = req.query._id;
-    data.edit(_id);
+    var result = await data.edit(_id);
+    res.send(result);
 });
 
 app.get('/schedule',async function(req,res){
